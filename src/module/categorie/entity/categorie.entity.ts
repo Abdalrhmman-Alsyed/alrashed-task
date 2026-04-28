@@ -1,9 +1,13 @@
+import { Product } from '../../product/entity/product.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity('categories')
@@ -17,9 +21,6 @@ export class Category {
   @Column({ length: 150, unique: true })
   slug!: string;
 
-  @Column({ nullable: true })
-  parent_id!: number;
-
   @Column({ type: 'text', nullable: true })
   description!: string;
 
@@ -28,4 +29,16 @@ export class Category {
 
   @UpdateDateColumn()
   updated_at!: Date;
+
+  @ManyToOne(() => Category, (category) => category.children, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'parent_id' })
+  parent!: Category | null;
+
+  @OneToMany(() => Category, (category) => category.parent)
+  children!: Category[];
+
+  @OneToMany(() => Product, (product) => product.category)
+  products!: Product[];
 }

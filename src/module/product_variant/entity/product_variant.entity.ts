@@ -1,9 +1,14 @@
+import { OrderItem } from '../../order_item/entity/order_item.entity';
+import { Product } from '../../product/entity/product.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity('product_variants')
@@ -28,4 +33,11 @@ export class ProductVariant {
 
   @UpdateDateColumn()
   updated_at!: Date;
+
+  @ManyToOne(() => Product, (product) => product.variants)
+  @JoinColumn({ name: 'product_id' })
+  product!: Product;
+
+  @OneToMany(() => OrderItem, (item) => item.variant)
+  orderItems!: OrderItem[];
 }
