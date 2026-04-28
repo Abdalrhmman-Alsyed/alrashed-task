@@ -6,16 +6,22 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('orders')
-export class Order {
+@Entity('notifications')
+export class Notification {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ length: 30 })
-  status!: string;
+  @Column({ length: 150 })
+  title!: string;
 
-  @Column('decimal', { precision: 10, scale: 2 })
-  total_amount!: number;
+  @Column({ type: 'text' })
+  message!: string;
+
+  @Column({ length: 20 })
+  type!: string;
+
+  @Column({ default: false })
+  is_read!: boolean;
 
   @CreateDateColumn()
   created_at!: Date;

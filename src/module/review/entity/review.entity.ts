@@ -6,16 +6,16 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('orders')
-export class Order {
+@Entity('reviews')
+export class Review {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ length: 30 })
-  status!: string;
+  @Column()
+  rating!: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
-  total_amount!: number;
+  @Column({ type: 'text', nullable: true })
+  comment!: string;
 
   @CreateDateColumn()
   created_at!: Date;
