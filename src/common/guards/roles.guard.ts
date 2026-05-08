@@ -25,9 +25,11 @@ export class RolesGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const user = request.user as { role?: string } | undefined;
 
+    
     if (!user?.role) {
       throw new UnauthorizedException('User role is missing in token payload');
     }
+
 
     return requiredRoles.some(
       (role) => role.toLowerCase() === user.role?.toLowerCase(),

@@ -14,6 +14,7 @@ export class HttpInterceptor<T> implements NestInterceptor<
   intercept(
     _context: ExecutionContext,
     next: CallHandler,
+    
   ): Observable<{ success: boolean; message: string; data: T }> {
     return next.handle().pipe(
       map((data) => ({
