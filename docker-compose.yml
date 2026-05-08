@@ -10,8 +10,14 @@ services:
       - DATABASE_USER=postgres
       - DATABASE_PASSWORD=password
       - DATABASE_NAME=task-alrashed
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
     env_file:
       - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start:dev
     depends_on:
       postgres:
         condition: service_healthy
@@ -20,7 +26,7 @@ services:
 
   postgres:
     image: postgres:15
-    container_name: task_alrashed 
+    container_name: task_alrashed
     environment:
       POSTGRES_DB: task-alrashed
       POSTGRES_USER: postgres
