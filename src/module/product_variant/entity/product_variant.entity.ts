@@ -26,7 +26,7 @@ export class ProductVariant {
   stock_quantity!: number;
 
   @Column({ type: 'json', nullable: true })
-  attributes!: any;
+  attributes!: Record<string, unknown> | null;
 
   @CreateDateColumn()
   created_at!: Date;

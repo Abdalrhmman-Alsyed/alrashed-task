@@ -51,11 +51,11 @@ export class ProductService {
     Object.assign(product, dto);
 
     if (dto.category_id !== undefined) {
-      product.category = { id: dto.category_id } as any;
+      product.category = { id: dto.category_id } as Product['category'];
     }
 
     if (dto.brand_id !== undefined) {
-      product.brand = { id: dto.brand_id } as any;
+      product.brand = { id: dto.brand_id } as Product['brand'];
     }
 
     return this.productRepository.save(product);

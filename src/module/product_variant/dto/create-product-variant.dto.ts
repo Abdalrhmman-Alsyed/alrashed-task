@@ -19,7 +19,7 @@ export class CreateProductVariantDto {
   stock_quantity!: number;
 
   @IsOptional()
-  attributes?: any;
+  attributes?: Record<string, unknown>;
 
   @IsNumber()
   product_id!: number;

@@ -53,7 +53,7 @@ export class ProductVariantService {
     Object.assign(variant, dto);
 
     if (dto.product_id !== undefined) {
-      variant.product = { id: dto.product_id } as any;
+      variant.product = { id: dto.product_id } as ProductVariant['product'];
     }
 
     return this.variantRepository.save(variant);

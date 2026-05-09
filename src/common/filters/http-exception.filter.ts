@@ -19,7 +19,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-        
     const payload =
       exception instanceof HttpException ? exception.getResponse() : null;
 

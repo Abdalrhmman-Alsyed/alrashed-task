@@ -55,7 +55,7 @@ export class OrderService {
     }
 
     if (dto.address_id !== undefined) {
-      order.address = { id: dto.address_id } as any;
+      order.address = { id: dto.address_id } as Order['address'];
     }
 
     return this.orderRepository.save(order);

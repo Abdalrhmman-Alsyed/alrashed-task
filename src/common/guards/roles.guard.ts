@@ -5,8 +5,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { Request } from 'express';
 import { ROLES_KEY } from '../decorators/roles.decorator';
 import { Role } from '../enum/role.enum';
+
+type RequestWithUser = Request & {
+  user?: { role?: string };
+};
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -22,14 +27,12 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    const request = context.switchToHttp().getRequest();
-    const user = request.user as { role?: string } | undefined;
+    const request = context.switchToHttp().getRequest<RequestWithUser>();
+    const user = request.user;
 
-    
     if (!user?.role) {
       throw new UnauthorizedException('User role is missing in token payload');
     }
-
 
     return requiredRoles.some(
       (role) => role.toLowerCase() === user.role?.toLowerCase(),

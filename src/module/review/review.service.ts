@@ -55,11 +55,11 @@ export class ReviewService {
     }
 
     if (dto.product_id !== undefined) {
-      review.product = { id: dto.product_id } as any;
+      review.product = { id: dto.product_id } as Review['product'];
     }
 
     if (dto.user_id !== undefined) {
-      review.user = { id: dto.user_id } as any;
+      review.user = { id: dto.user_id } as Review['user'];
     }
 
     return this.reviewRepository.save(review);

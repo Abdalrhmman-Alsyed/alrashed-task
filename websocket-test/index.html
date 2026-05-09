@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Test Client</title>
+  </head>
+  <body>
+    <h2>WebSocket Test Client</h2>
+    <p>Open browser console to view events.</p>
+
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <script>
+      const socket = io("http://localhost:3000/ws");
+      const TEST_USER_ID = 2;
+
+      socket.on("connect", () => {
+        console.log("connected:", socket.id);
+        socket.emit("join_user_room", { userId: TEST_USER_ID });
+      });
+
+      socket.on("connect_error", (err) => {
+        console.error("connect_error:", err.message);
+      });
+
+      socket.on("joined_room", (data) => {
+        console.log("joined_room:", data);
+      });
+
+      socket.on("notification_created", (data) => {
+        console.log("notification_created:", data);
+      });
+
+      socket.on("notification_updated", (data) => {
+        console.log("notification_updated:", data);
+      });
+
+      socket.on("notification_deleted", (data) => {
+        console.log("notification_deleted:", data);
+      });
+    </script>
+  </body>
+</html>

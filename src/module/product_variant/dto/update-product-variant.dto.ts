@@ -15,7 +15,7 @@ export class UpdateProductVariantDto {
   stock_quantity?: number;
 
   @IsOptional()
-  attributes?: any;
+  attributes?: Record<string, unknown>;
 
   @IsOptional()
   @IsNumber()

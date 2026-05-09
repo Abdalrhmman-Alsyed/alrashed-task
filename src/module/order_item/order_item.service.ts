@@ -55,7 +55,7 @@ export class OrderItemService {
     }
 
     if (dto.variant_id !== undefined) {
-      orderItem.variant = { id: dto.variant_id } as any;
+      orderItem.variant = { id: dto.variant_id } as OrderItem['variant'];
     }
 
     return this.orderItemRepository.save(orderItem);
